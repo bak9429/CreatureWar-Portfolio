@@ -1,0 +1,37 @@
+﻿t3Id,t3Name,t4Id,t4Name
+Artillery,포격,Artillery.T4.1,폭발성
+Artillery,포격,Artillery.T4.2,산성
+Artillery,포격,Artillery.T4.3,독가스
+Artillery,포격,Artillery.T4.4,관통
+Bombing,폭격,Bombing.T4.1,집중 투하
+Bombing,폭격,Bombing.T4.2,광역 산포
+Bombing,폭격,Bombing.T4.3,지속 살포
+Bombing,폭격,Bombing.T4.4,중량 투하
+Defense,방어,Defense.T4.1,중장갑
+Defense,방어,Defense.T4.2,기동 방어
+Defense,방어,Defense.T4.3,반격 방어
+Defense,방어,Defense.T4.4,지역 방호
+Engineering,공병,Engineering.T4.1,건설
+Engineering,공병,Engineering.T4.2,굴착
+Engineering,공병,Engineering.T4.3,시설 파괴
+Engineering,공병,Engineering.T4.4,수리
+Melee,근접,Melee.T4.1,절단
+Melee,근접,Melee.T4.2,관통
+Melee,근접,Melee.T4.3,압쇄
+Melee,근접,Melee.T4.4,구속
+Recon,정찰,Recon.T4.1,은폐
+Recon,정찰,Recon.T4.2,광역 탐지
+Recon,정찰,Recon.T4.3,고고도 정찰
+Recon,정찰,Recon.T4.4,지속 감시
+Shooting,사격,Shooting.T4.1,정밀
+Shooting,사격,Shooting.T4.2,연사
+Shooting,사격,Shooting.T4.3,산탄
+Shooting,사격,Shooting.T4.4,관통
+Support,지휘·지원,Support.T4.1,통신 중계
+Support,지휘·지원,Support.T4.2,전술 조정
+Support,지휘·지원,Support.T4.3,정찰 지원
+Support,지휘·지원,Support.T4.4,보급 지원
+Transport,운송,Transport.T4.1,고속 운송
+Transport,운송,Transport.T4.2,중량 운송
+Transport,운송,Transport.T4.3,보급 운송
+Transport,운송,Transport.T4.4,특수환경 운송
