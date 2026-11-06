@@ -14,7 +14,7 @@
   <div class="shell">
     <header class="site-header">
       <a href="#top" class="brand" aria-label="Creature War 처음으로"><span class="brand-mark">CW<span class="mark-dot"></span></span><span class="brand-words"><strong>CREATURE WAR</strong><small>DESIGN PORTFOLIO</small></span></a>
-      <nav aria-label="주요 탐색"><a href="#overview">Overview</a><a href="#explorer">Evolution</a><a href="#roles">Roles</a><a href="#status">Status</a><a class="nav-github" href="README.md">Project docs ↗</a></nav>
+      <nav aria-label="주요 탐색"><a href="#overview">Overview</a><a href="#loop">Game loop</a><a href="#war">Warfare</a><a href="#network-plan">Network</a><a href="#explorer">Evolution</a><a href="#status">Status</a><a class="nav-github" href="README.md">Project docs ↗</a></nav>
     </header>
     <main>
       <section class="hero" id="top">
@@ -22,8 +22,8 @@
           <div class="eyebrow"><span class="eyebrow-line"></span> GAME SYSTEMS / DEVELOPMENT CASE STUDY <span class="work-badge">IN DEVELOPMENT</span></div>
           <h1>Design the creature.<br/><em>Change the battle.</em></h1>
           <p class="lede">신체 구조가 전술의 선택지를 만드는 <strong>생물 제작 × 분대 RTS</strong> 게임 프로젝트.</p>
-          <p class="hero-description">생물의 BODY, PART, ORGAN을 조합하고, 설계한 생물들로 분대를 편성합니다. 이 포트폴리오는 진화 트리 데이터 구조, 시스템 책임 분리, 에셋 생성 및 검수 과정을 다룹니다.</p>
-          <div class="hero-actions"><a class="primary" href="#explorer">진화 데이터 살펴보기 <span aria-hidden="true">↘</span></a><a class="secondary" href="docs/one-page-summary.md">프로젝트 요약 보기 ↗</a></div>
+          <p class="hero-description">생물을 직접 설계해 로스터를 만들고, 전략·전술·분대 지휘관이 협력하는 전쟁에 투입합니다. 임무·손실·보상은 다음 생물의 진화로 이어집니다. 진화 설계, 게임 루프, 전구 지휘, 네트워크 구축 구상 및 검증 과정을 소개합니다.</p>
+          <div class="hero-actions"><a class="primary" href="#loop">전체 게임 루프 <span aria-hidden="true">↘</span></a><a class="secondary" href="docs/game-overview.md">프로젝트 개요 ↗</a></div>
           <p class="hero-note">개발 중인 프로젝트의 설계 데이터 시각화입니다. 완성된 게임이나 3D 데모가 아닙니다.</p>
         </div>
         <div class="hero-visual" aria-hidden="true">
@@ -42,18 +42,58 @@
         <div class="metric"><span class="metric-num" id="m-roles">9</span><span class="metric-label">T3 ROLES</span><span class="metric-sub">공통 전술 분기</span></div>
         <div class="metric"><span class="metric-num" id="m-methods">36</span><span class="metric-label">T4 METHODS</span><span class="metric-sub">역할별 수행 방식</span></div>
       </section>
+      <section class="experience-section" id="loop">
+        <div class="section-kicker">PLAYER EXPERIENCE / 01</div>
+        <div class="section-heading"><h2>생물의 설계가 전쟁을 거쳐 다시 진화로.</h2><p>제작, 로스터 편성, 협력 RTS, 전쟁 결과가 하나의 성장 사이클을 이룹니다. <strong>전쟁 중에는 새 생물을 제작하지 않습니다.</strong></p></div>
+        <div class="loop-track" aria-label="게임 반복 루프">
+          <article><span>STEP 01</span><strong>DESIGN</strong><h3>생물 진화 · 제작</h3><p>T0~T5 경로와 BODY, PART, ORGAN을 조합해 행동 가능 조건을 만듭니다.</p></article>
+          <article><span>STEP 02</span><strong>ROSTER</strong><h3>로스터 · 편성</h3><p>저장한 생물을 War COST 예산 내에서 편성하고 역할을 정합니다.</p></article>
+          <article><span>STEP 03</span><strong>WARFARE</strong><h3>지휘 · RTS</h3><p>전략 목표 → 전술 작전 → 분대 직접 조작으로 전쟁에 참여합니다.</p></article>
+          <article><span>STEP 04</span><strong>PROGRESSION</strong><h3>결과 · 재설계</h3><p>임무/승패/손실을 정산하고 EC로 다음 진화 선택지를 해금합니다.</p></article>
+        </div>
+        <p class="explainer-note">이 화면은 플레이 흐름을 설명하는 설계 시각화이며 구현된 플레이 화면이 아닙니다. <a href="docs/game-loop.md">상세 게임 루프와 임무 예시 보기 ↗</a></p>
+      </section>
+      <section class="war-section" id="war">
+        <div class="section-kicker">COOPERATIVE WARFARE / 02</div>
+        <div class="section-heading"><h2>하나의 전쟁, 세 가지 지휘 관점.</h2><p>다른 지휘 계층의 판단이 하나의 전장과 자원 경제로 연결되는 플레이를 설계했습니다.</p></div>
+        <div class="command-grid">
+          <article><div class="command-head"><span>01 / STRATEGIC</span><b>전략 전구</b></div><h3>무엇을 위해 싸울 것인가?</h3><p>점령 목표·전쟁 경제·War COST 배분·전략시설과 보급망을 관리합니다.</p><small>전략 지휘관 → 전술 전구에 목표·자원 배정</small></article>
+          <article><div class="command-head"><span>02 / TACTICAL</span><b>전술 전구</b></div><h3>어디서 어떻게 작전할 것인가?</h3><p>섹터·경로·임무 계약·분대 파견·전술시설과 현장 보급을 관리합니다.</p><small>전술 지휘관 → 분대에 임무·예산 전달</small></article>
+          <article><div class="command-head"><span>03 / SQUAD RTS</span><b>분대 전구</b></div><h3>현장을 어떻게 움직일 것인가?</h3><p>RTS 직접 선택·이동·공격이동·정찰·공병. AI는 개체 공격 실행을 보조합니다.</p><small>현장 결과·정찰 정보가 상위 전구로 보고</small></article>
+        </div>
+        <div class="economy-ribbon"><div><b>WAR COST</b><span>전쟁 내부의 배치·보급·시설 예산</span></div><span class="flow-arrow">↔</span><div><b>EVOLUTION CURRENCY</b><span>종료 후 계정 성장에 사용하는 재화</span></div><a href="docs/war-command-structure.md">전구 구조 자세히 ↗</a></div>
+      </section>
+      <section class="network-section" id="network-plan">
+        <div class="section-kicker">MULTIPLAYER ARCHITECTURE / 03 <span class="unverified">DESIGN PROPOSAL · NOT IMPLEMENTED</span></div>
+        <div class="section-heading"><h2>멀티플레이: 호스트 기반 연결을 검토.</h2><p>상시 전용 서버 비용을 낮추는 P2P/호스트 방향을 우선 검토했습니다. <strong>20v20 / 30v30은 검증 목표</strong>이며 온라인 구현 완료를 의미하지 않습니다.</p></div>
+        <div class="network-layout">
+          <div class="network-diagram" aria-label="네트워크 구성 후보">
+            <div class="network-top">연결 보조 / 세션 탐색 <small>선택 사항 · 미구현</small></div>
+            <div class="diagram-connector">↓ 세션·접속 정보</div>
+            <div class="network-host"><small>후보 구조 / SINGLE MATCH AUTHORITY</small><strong>매치 호스트</strong><span>명령 검증 · 공통 전쟁 상태 · 상태 전파</span></div>
+            <div class="network-spokes" aria-hidden="true">↓↑ <span>명령 / 승인 / 스냅샷</span> ↓↑</div>
+            <div class="network-clients"><div>전략 지휘</div><div>전술 지휘</div><div>분대 RTS</div></div>
+            <p>관측권한에 따라 상태 전송 · NAT/릴레이/재접속·호스트 이탈·치트/보상 보호 검증 필요</p>
+          </div>
+          <div class="network-details"><h3>게임의 규모보다 먼저 검증할 것</h3>
+            <ul><li>호스트가 명령 소유권·COST·유효성을 판정할 수 있는가?</li><li>전략/전술 이벤트와 분대 유닛 상태를 구분해 전송할 수 있는가?</li><li>정찰 정보가 관측 권한이 없는 클라이언트로 누출되지 않는가?</li><li>NAT 실패, 호스트 이탈, 재접속과 부정행위를 어떻게 다룰 것인가?</li><li>네트워크 부하가 커지면 전용 권한 서버로 전환해야 하는가?</li></ul>
+            <a class="secondary" href="docs/network-architecture.md">연결 절차 · 메시지 동기화 · 검증 계획 ↗</a>
+          </div>
+        </div>
+        <p class="explainer-note"><strong>기획 확정:</strong> 호스트/P2P 우선 검토. <strong>후보 제안:</strong> 매치 호스트 권한 + 연결 보조 서비스 + 관심 영역 동기화. 구현과 20v20/30v30 실측은 미검증.</p>
+      </section>
       <section class="overview-section">
-        <div class="section-kicker">DESIGN PRINCIPLES / 01</div><div class="section-heading"><h2>형태는 규칙이 된다.</h2><p>유닛의 클래스 이름이 아니라, 몸과 생리의 구성에서 행동이 파생되도록 설계합니다.</p></div>
+        <div class="section-kicker">BODY SYSTEM / 04</div><div class="section-heading"><h2>형태는 규칙이 된다.</h2><p>유닛의 클래스 이름이 아니라, 몸과 생리의 구성에서 행동이 파생되도록 설계합니다.</p></div>
         <div class="principles"><article><span class="concept-icon">01</span><h3>BODY</h3><p>체형, 무게, 다리 구조, 부착 소켓, 허가와 제약을 정의합니다.</p><small>STRUCTURE & CONSTRAINTS</small></article><article><span class="concept-icon">02</span><h3>PART / HEAD</h3><p>공격, 이동, 감지, 방어, 작업을 수행하는 실질적인 신체 구조입니다.</p><small>ACTION PROVIDERS</small></article><article><span class="concept-icon">03</span><h3>ORGAN</h3><p>신경 제어, 순환과 공급, 대사, 기능 활성화 조건을 정의합니다.</p><small>FUNCTIONAL ENABLEMENT</small></article></div>
       </section>
       <section class="explorer-section" id="explorer">
-        <div class="section-kicker">DATA EXPLORER / 02</div><div class="section-heading"><h2>진화 트리 데이터 살펴보기</h2><p>4족형 4종족의 T0–T2 <strong>68개 데이터 노드</strong>를 탐색합니다. 노드 클릭 시 부모 경로와 설계 상태가 표시됩니다.</p></div>
+        <div class="section-kicker">DATA EXPLORER / 05</div><div class="section-heading"><h2>진화 트리 데이터 살펴보기</h2><p>4족형 4종족의 T0–T2 <strong>68개 데이터 노드</strong>를 탐색합니다. 노드 클릭 시 부모 경로와 설계 상태가 표시됩니다.</p></div>
         <div class="explorer-toolbar"><div class="species-tabs" id="speciesTabs" role="tablist" aria-label="종족 선택"></div><label class="search-box"><span aria-hidden="true">⌕</span><input id="search" aria-label="노드 이름 또는 ID 검색" placeholder="노드 이름 · ID 검색" autocomplete="off"/></label><select id="tierFilter" aria-label="티어 필터"><option value="ALL">모든 티어</option><option value="T0">T0</option><option value="T1">T1</option><option value="T2">T2</option></select></div>
         <div class="explorer-grid"><div class="tree-panel"><div class="panel-meta"><span id="speciesHeader">Q01 / 포유류 수렵종</span><span><strong id="visibleCount">17</strong> nodes</span></div><div class="nodes" id="nodes" aria-live="polite"></div></div><aside class="detail-panel"><span class="detail-eyebrow">SELECTED NODE</span><div id="nodeDetail"></div><div class="detail-footer">이 뷰어는 노드의 데이터 관계를 보여주는 것으로, 생물 이미지·실제 동작을 검증하지 않습니다.</div></aside></div>
       </section>
-      <section class="role-section" id="roles"><div class="section-kicker">TACTICAL SPECIALIZATION / 03</div><div class="section-heading"><h2>같은 계통, 다른 수행 방식.</h2><p>T2 이후 모든 종족이 공통 T3 전술 역할로 분기할 수 있으며, 각 역할 아래 T4 수행 방식 4개가 정의되어 있습니다.</p></div><div class="roles-layout"><div class="role-tabs" id="roleTabs" role="tablist" aria-label="역할 선택"></div><div class="role-display"><div class="role-top"><span>SELECTED T3 ROLE</span><h3 id="selectedRoleName">근접</h3></div><div class="role-methods" id="roleMethods"></div><div class="role-caution">T3·T4 선택은 행동의 구조적 특화를 정의하며, 실제 능력 실행은 PART·ORGAN 조건에 의존합니다. 이 목록은 완성형 모델이나 전투 구현 증거가 아닙니다.</div></div></div></section>
-      <section class="status-section" id="status"><div class="section-kicker">DEVELOPMENT STATUS / 04</div><div class="section-heading"><h2>구현과 설계를 구분합니다.</h2><p>현재 확인 가능한 범위를 벗어나 기능의 완성도나 모델 제작 성공을 주장하지 않습니다.</p></div><div class="status-grid"><div><span class="status-tag tag-defined">DATA DEFINED</span><h3>272 T0–T2 노드</h3><p>16종족과 부모–자식 경로가 CSV로 정리되어 있습니다. 공개 샘플 68개에는 자동 연결 검사를 포함했습니다.</p></div><div><span class="status-tag tag-defined">DESIGN DEFINED</span><h3>9 Roles / 36 Methods</h3><p>T3 공통 역할과 T4 운용 방식이 정의되어 있습니다. 모델 제작이나 실제 전투 성능을 뜻하지 않습니다.</p></div><div><span class="status-tag tag-testing">UNDER VALIDATION</span><h3>AI 3D Pipeline</h3><p>Trellis.cpp를 통한 생성 테스트에서 다중 이미지, 형상 중복, 모델 경로 등 문제를 확인하고 개선 중입니다.</p></div><div><span class="status-tag tag-pending">NOT VERIFIED</span><h3>BODY·HEAD Exchange</h3><p>목 접합면, 파츠 교체, Unreal에서의 동작은 공개된 자료만으로 완료를 증명할 수 없습니다.</p></div></div></section>
-      <section class="last-cta"><div><div class="section-kicker">DOCUMENTATION</div><h2>Decision → Implementation → Validation</h2><p>이 프로젝트에서 무엇을 설계했고, 어떤 문제를 발견하고, 무엇이 아직 남았는지 문서로 확인할 수 있습니다.</p></div><div><a class="primary" href="docs/qa-and-lessons.md">QA와 문제 해결 사례 ↗</a><a class="secondary" href="README.md">README / 전체 설명 ↗</a></div></section>
+      <section class="role-section" id="roles"><div class="section-kicker">TACTICAL SPECIALIZATION / 06</div><div class="section-heading"><h2>같은 계통, 다른 수행 방식.</h2><p>T2 이후 모든 종족이 공통 T3 전술 역할로 분기할 수 있으며, 각 역할 아래 T4 수행 방식 4개가 정의되어 있습니다.</p></div><div class="roles-layout"><div class="role-tabs" id="roleTabs" role="tablist" aria-label="역할 선택"></div><div class="role-display"><div class="role-top"><span>SELECTED T3 ROLE</span><h3 id="selectedRoleName">근접</h3></div><div class="role-methods" id="roleMethods"></div><div class="role-caution">T3·T4 선택은 행동의 구조적 특화를 정의하며, 실제 능력 실행은 PART·ORGAN 조건에 의존합니다. 이 목록은 완성형 모델이나 전투 구현 증거가 아닙니다.</div></div></div></section>
+      <section class="status-section" id="status"><div class="section-kicker">DEVELOPMENT STATUS / 07</div><div class="section-heading"><h2>구현과 설계를 구분합니다.</h2><p>현재 확인 가능한 범위를 벗어나 기능의 완성도나 모델 제작 성공을 주장하지 않습니다.</p></div><div class="status-grid"><div><span class="status-tag tag-defined">DATA DEFINED</span><h3>272 T0–T2 노드</h3><p>16종족과 부모–자식 경로가 CSV로 정리되어 있습니다. 공개 샘플 68개에는 자동 연결 검사를 포함했습니다.</p></div><div><span class="status-tag tag-defined">DESIGN DEFINED</span><h3>9 Roles / 36 Methods</h3><p>T3 공통 역할과 T4 운용 방식이 정의되어 있습니다. 모델 제작이나 실제 전투 성능을 뜻하지 않습니다.</p></div><div><span class="status-tag tag-testing">UNDER VALIDATION</span><h3>AI 3D Pipeline</h3><p>Trellis.cpp를 통한 생성 테스트에서 다중 이미지, 형상 중복, 모델 경로 등 문제를 확인하고 개선 중입니다.</p></div><div><span class="status-tag tag-pending">NOT VERIFIED</span><h3>BODY·HEAD Exchange</h3><p>목 접합면, 파츠 교체, Unreal에서의 동작은 공개된 자료만으로 완료를 증명할 수 없습니다.</p></div></div></section>
+      <section class="last-cta"><div><div class="section-kicker">DOCUMENTATION</div><h2>Decision → Implementation → Validation</h2><p>게임 개요·플레이 루프·전략/전술/분대 협력 구조·네트워크 구축 후보와 검증 이력을 문서로 확인할 수 있습니다.</p></div><div><a class="primary" href="docs/qa-and-lessons.md">QA와 문제 해결 사례 ↗</a><a class="secondary" href="README.md">README / 전체 설명 ↗</a></div></section>
     </main><footer><div><strong>CREATURE WAR</strong><span>Design & Engineering Portfolio</span></div><span>Work in progress · Data snapshot 2026-11-07</span><span>Public documentation only / No game binaries</span></footer>
   </div>
 </body>

@@ -8,7 +8,7 @@
 
 `Unreal Engine 5.8 (전환/개발 중)` · `Unity 6 (선행 프로토타입)` · `C++ / C#` · `Data-driven Design` · `Trellis.cpp (3D 생성 실험)`
 
-[트리 데이터 뷰어](./index.html) · [핵심 설계](./docs/architecture.md) · [의사결정](./docs/design-decisions.md) · [문제 해결](./docs/qa-and-lessons.md) · [개발 현황](./docs/development-status.md)
+[게임 전체 개요](./docs/game-overview.md) · [게임 루프](./docs/game-loop.md) · [3계층 지휘](./docs/war-command-structure.md) · [네트워크 구상](./docs/network-architecture.md) · [인터랙티브 트리](./index.html)
 
 
 > **Portfolio / Work in Progress.** 이 저장소는 채용 검토용 공개 자료입니다. 실제 게임 저장소 전체가 아니며, 공개된 CSV는 설계·관리 데이터 샘플입니다. 기능 및 3D 모델의 완성도는 검증된 범위까지만 기술합니다.
@@ -34,6 +34,35 @@ flowchart LR
   J --> K[결과 분석과 재설계]
   K --> G
 ```
+
+## 게임의 전체 구조: 제작 → 지휘 → 전쟁 → 성장
+
+이 프로젝트는 단순한 '몬스터 생성기'가 아니라 **커스텀 생물 제작이 실제 대규모 협력 전쟁의 전략과 전술에 연결되는 게임**을 목표로 합니다. 설계한 생물을 매치 전에 편성하고, 전쟁 중에는 신규 생물을 즉석 생산하지 않는 방향입니다. **T0부터 참전**할 수 있으며, 고티어 성능과 저티어 COST 효율 사이에 선택을 만듭니다.
+
+```mermaid
+flowchart LR
+  A[생물 설계\nBODY · PART · ORGAN] --> B[로스터 저장 / COST 편성]
+  B --> C[전쟁 참가 / 지휘 역할]
+  C --> D[전략→전술→분대\n협력 RTS]
+  D --> E[승패·임무·손실 정산]
+  E --> F[EC 획득 / 진화 해금]
+  F --> A
+```
+
+전쟁은 **전략 전구 → 전술 전구 → 분대 전구**로 구성됩니다. 전략 지휘관은 목표·보급·예산을, 전술 지휘관은 경로·섹터·분대 파견을, 분대 지휘관은 직접 RTS 명령을 담당합니다. 개체 AI는 공격 수단 선택과 국소 움직임을 실행합니다. 전쟁 내부의 **War COST**와 계정 성장 재화 **Evolution Currency(EC)**를 분리하여, 현장 임무 성과가 다음 생물 설계로 되돌아오는 구조입니다.
+
+- **[프로젝트 전체 개요](./docs/game-overview.md)** — 게임의 목표·차별화·전투·경제·종족·현재 단계
+- **[게임 루프 상세](./docs/game-loop.md)** — 매치 전/중/후, 분대 임무, 손실/정찰/보상, 반복 성장
+- **[3계층 전구와 지휘관](./docs/war-command-structure.md)** — 전략·전술·분대·유닛 AI 책임 구분
+- **[멀티플레이 네트워크 설계](./docs/network-architecture.md)** — P2P/호스트 지향, 연결 흐름, 권한·동기화, 위험·검증 계획
+
+## 네트워크는 어떻게 구성하려는가?
+
+**확정된 방향:** 상시 서버 운영비를 낮추기 위해 *P2P/호스트 기반* 구조를 우선 검토합니다. 전략·전술·분대 지휘 클라이언트들이 하나의 전쟁 상태를 공유해야 하며, **20대20 또는 30대30은 검토했던 목표 규모**이지 달성 성과가 아닙니다.
+
+**후보 구현 방식(아직 확정/실행되지 않음):** 경량 매치 로비/연결 보조 + 권한을 가진 매치 호스트 + 명령 검증과 전구별/관측 영역별 상태 전송. NAT/릴레이, 호스트 이탈, 재접속, AI·물리 동기화, 치트/보상 검증이 필수 테스트입니다. 필요하다면 전용 권한 서버로 전환하는 대안도 비교합니다.
+
+자세한 다이어그램·메시지 흐름과 테스트 로드맵은 **[네트워크 문서](./docs/network-architecture.md)**에 있습니다. **온라인 멀티플레이 구현 완료를 주장하지 않습니다.**
 
 ## 데이터 모델과 범위
 
@@ -68,7 +97,11 @@ Trellis.cpp 기반 자동 생성 실험에서 4면도 합성 이미지, 시트 �
 
 ## 자료 탐색
 
-- [포트폴리오 핵심 요약](./docs/one-page-summary.md) — 목표, 설계, 주요 선택
+- [포트폴리오 핵심 요약](./docs/one-page-summary.md) — 목표, 게임 루프, 네트워크 방향
+- [게임 전체 개요](./docs/game-overview.md) — 게임 목적, 차별화, 경제와 단계
+- [게임 루프](./docs/game-loop.md) — 매치 전/중/후 상세 흐름
+- [전구·지휘 구조](./docs/war-command-structure.md) — 전략→전술→분대
+- [네트워크 설계](./docs/network-architecture.md) — 호스트 중심 아키텍처 후보와 검증 계획
 - [아키텍처 / 데이터 경계](./docs/architecture.md) — BODY · PART · ORGAN · ROLE
 - [설계 의사결정](./docs/design-decisions.md) — 데이터 중심 트리, RTS 조작 방식
 - [QA와 문제 해결](./docs/qa-and-lessons.md) — 오류, 원인, 수정, 미완료 검증
